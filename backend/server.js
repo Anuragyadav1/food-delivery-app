@@ -5,6 +5,7 @@ const connectDB = require('./config/db');
 const foodRouter = require('./routes/foodRoute');
 const userRouter = require('./routes/userRoute');
 const cartRouter = require('./routes/cartRoute');
+const orderRouter = require('./routes/orderRoute');
 dotenv.config()
 //app config
 const app = express();
@@ -22,6 +23,7 @@ app.use("/api/food",foodRouter)
 app.use("/images",express.static('uploads')) //mounting uploads folder at this endpoint
 app.use("/api/user",userRouter)
 app.use("/api/cart",cartRouter)
+app.use("/api/order",orderRouter)
 
 app.get("/",(req,res)=>{
     res.send("Home Page")
