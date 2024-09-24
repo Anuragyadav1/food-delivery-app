@@ -2,9 +2,9 @@ const userModel = require("../models/userModel")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 const validator = require("validator")
-// const dotenv = require("dotenv");
+const dotenv = require("dotenv");
 
-// dotenv.config()
+dotenv.config()
 
 
 //login user
