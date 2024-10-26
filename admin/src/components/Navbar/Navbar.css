@@ -1,14 +1,41 @@
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 4%;
+/* Navbar.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 4%;
+  background-color: #f5f5f5; /* Optional: Add background color */
 }
 
-.navbar .logo{
-    width: max(10%,80px);
+.navbar .logo {
+  width: max(4%, 40px); /* Adjusted width for larger logo */
+}
 
+.navbar p {
+  font-size: 1.5rem; /* Adjust font size for better readability */
+  font-weight: bold;
+  color: #333;
 }
-.navbar .profile{
-    width: 40px;
+
+.navbar .profile {
+  width: 40px;
+  border-radius: 50%; /* Optional: Make profile image round */
 }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar p {
+    font-size: 1.2rem; /* Reduce font size on smaller screens */
+  }
+  
+  .navbar .logo {
+    width: 30px; /* Reduce logo size for small screens */
+  }
+  
+  .navbar .profile {
+    width: 30px; /* Reduce profile image size */
+  }
+}
+
+

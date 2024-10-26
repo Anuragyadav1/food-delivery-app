@@ -3,6 +3,7 @@ import './Navbar.css'
 import { assets } from '../../assets/assets'
 import {Link, useNavigate} from 'react-router-dom'
 import { StoreContext } from '../../context/ContextStore'
+import image from './image.png'
 
 const Navbar = ({setShowLogin}) => {
 
@@ -19,13 +20,14 @@ const Navbar = ({setShowLogin}) => {
   return (
     <div className='navbar'>
             <Link to='/'>
-               <img src={assets.logo} alt="" className='logo' />
+               {/* <img src={assets.logo} alt="" className='logo' /> */}
+               <img src={image} alt="" className='logo' />
             </Link>
 
         <ul className='navbar-menu'>
             <Link to='/' onClick={()=>setMenu("home")} className={menu==='home'?'active':''}>Home</Link>
             <a href='#explore-menu' onClick={()=>setMenu("menu")} className= {menu==='menu'?'active':''}>Menu</a>
-            <a href='#app-download' onClick={()=>setMenu("mobile-app")} className= {menu==='mobile-app'?'active':''}>Mobile-app</a>
+            {/* <a href='#app-download' onClick={()=>setMenu("mobile-app")} className= {menu==='mobile-app'?'active':''}>Mobile-app</a> */}
             <a href='#footer' onClick={()=>setMenu("contact-us")} className= {menu==='contact-us'?'active':''}>contact</a>
         </ul>
         <div className="navbar-right">

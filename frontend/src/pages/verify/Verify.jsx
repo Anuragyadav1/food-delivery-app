@@ -7,10 +7,10 @@ import axios from "axios"
 
 const Verify = () => {
 
-    const [searchParams,setParams] = useSearchParams();
+    const [searchParams,setSearchParams] = useSearchParams();
     const success = searchParams.get("success")
     const orderId = searchParams.get("orderId")
-    const{url} = useContext(StoreContext)
+    const{url} = useContext(StoreContext) // backend url 
     const navigate = useNavigate()
 
     // console.log(success,orderId)
@@ -34,12 +34,7 @@ const Verify = () => {
 
   return (
     <div className='verify'>
-    <div className="spinner">
-
-    </div>
-
-
-      
+      <div className="spinner"> </div>
     </div>
   )
 }

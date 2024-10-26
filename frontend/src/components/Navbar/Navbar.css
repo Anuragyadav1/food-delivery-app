@@ -4,9 +4,13 @@
     justify-content: space-between;
     align-items: center;
 }
-.navbar .logo{
+/* .navbar .logo{
   width: 150px;
-}
+} */
+
+.navbar .logo{
+    width: 80px;
+  }
 .navbar-menu{
     display: flex;
     list-style: none;

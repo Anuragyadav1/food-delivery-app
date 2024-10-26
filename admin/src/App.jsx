@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Sidebar from './components/Sidebar/Sidebar'
+import Home from './components/AdminWelcome'
 import { Route, Routes } from 'react-router-dom'
 import Orders from './pages/Orders/Orders'
 import Add from './pages/Add/Add'
@@ -22,6 +23,7 @@ function App() {
       <div className='app-content'>
         <Sidebar/>
         <Routes>
+          <Route path='/' element={<Home/>}/>
           <Route path='/add' element={<Add url={url}/>}/>
           <Route path='/list' element={<List url={url}/>}/>
           <Route path='/orders' element={<Orders url={url}/>}/>
