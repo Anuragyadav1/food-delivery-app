@@ -76,7 +76,7 @@ const onSubmitHandler = async(e)=>{
          <div className="add-category-price">
             <div className="add-category flex-col">
                 <p>Product category</p>
-                <select onChange={onChangeHandler}  name="category">
+                <select onChange={onChangeHandler}  name="category" value={data.category}>
                     <option value="Salad">Salad</option>
                     <option value="Rolls">Rolls</option>
                     <option value="Deserts">Deserts</option>
