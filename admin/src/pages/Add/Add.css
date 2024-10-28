@@ -40,3 +40,12 @@
     color: white;
     cursor: pointer;
 }
+.add-btn:hover {
+    background-color: #333; /* Slightly lighter shade */
+    transition: background-color 0.3s ease;
+}
+@media (min-width: 768px) { /* Adjust the min-width as per your design */
+    .add-btn {
+        margin-bottom: 20px; /* Add space from the bottom */
+    }
+}
