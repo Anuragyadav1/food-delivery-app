@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [count, setCount] = useState(0)
-  const url = "http://localhost:4000"
+  const url = "https://food-del-backend-jp98.onrender.com"
 
 
   return (
