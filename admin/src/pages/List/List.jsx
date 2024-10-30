@@ -5,12 +5,14 @@ import { toast } from 'react-toastify';
 
 const List = ({ url }) => {
   const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
   const [removingId, setRemovingId] = useState(null); // Track the item being removed
 
   const fetchList = async () => {
     try {
+      setLoading(true); // Set loading state to true before fetching
       const response = await axios.get(`${url}/api/food/list`);
-      console.log(response.data);
+      // console.log(response.data);
       if (response.data.success) {
         setList(response.data.data);
       } else {
@@ -18,6 +20,10 @@ const List = ({ url }) => {
       }
     } catch (error) {
       toast.error("Error fetching list");
+    }
+    finally{
+      setLoading(false); // Set loading state to false after fetching
+
     }
   };
 
@@ -46,6 +52,9 @@ const List = ({ url }) => {
   return (
     <div className='list add flex-col'>
       <p>All Food Lists</p>
+      {loading ? ( // Show loading text if data is still loading
+        <p className='loading'>Loading...</p>
+      ):(
       <div className="list-table">
         <div className="list-table-format title">
           <b>Image</b>
@@ -70,6 +79,7 @@ const List = ({ url }) => {
           </div>
         ))}
       </div>
+    )}
     </div>
   );
 };

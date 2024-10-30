@@ -53,7 +53,7 @@ const Orders = ({ url }) => {
     <div className='order add'>
       <h3>Order Page</h3>
       {loading ? (
-        <p>Loading orders...</p> // Show loading message while fetching orders
+        <p className='loading'>Loading orders...</p> // Show loading message while fetching orders
       ) : (
         <div className="order-list">
           {orders.length === 0 ? (

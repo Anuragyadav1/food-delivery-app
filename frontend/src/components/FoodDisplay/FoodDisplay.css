@@ -15,8 +15,10 @@
 }
 
 .loading {
-    font-size: 20px;
     text-align: center;
+    font-size: 20px;
     margin: 20px 0;
+    color: #6d6d6d; 
   }
+  
   

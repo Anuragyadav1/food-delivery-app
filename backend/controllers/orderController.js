@@ -27,6 +27,8 @@ const placeOrder = async (req, res) => {
       quantity: item.quantity,
     }));
 
+    // console.log(line_items)
+
     line_items.push({
       price_data: {
         currency: "inr",
@@ -37,6 +39,9 @@ const placeOrder = async (req, res) => {
       },
       quantity: 1,
     });
+
+    // console.log(line_items)
+
 
     const session = await stripe.checkout.sessions.create({
       line_items,

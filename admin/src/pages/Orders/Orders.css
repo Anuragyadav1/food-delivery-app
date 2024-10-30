@@ -29,6 +29,12 @@
     cursor: pointer;
     outline: none;
 }
+.loading {
+    text-align: center;
+    font-size: 20px;
+    margin: 20px 0;
+    color: #6d6d6d; 
+  }
 
 @media(max-width:1000px){
     .order-item{
