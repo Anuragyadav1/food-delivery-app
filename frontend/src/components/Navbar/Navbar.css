@@ -61,6 +61,7 @@
 
 .navbar-profile{
     position: relative;
+    cursor: pointer;
 }
 .nav-profile-dropdown{
     position: absolute;

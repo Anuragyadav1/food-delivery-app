@@ -43,9 +43,8 @@ const createToken = (id)=>{
 }
 
 //register user
-const registerUser = async (req,res) =>{
+const registerUser = async (req,res) => {
     const {name,password,email} = req.body
-
     try{
         //checking is user already exists
         const exists = await userModel.findOne({email})
@@ -79,10 +78,63 @@ res.json({success:true,token})
     catch(error){
         console.log(error)
         res.json({success:false,message:"Error"})
-
     }
-    
-
 }
 
-module.exports = {loginUser,registerUser}
+// Update user details
+const updateUserDetails = async (req, res) => {
+    const userId = req.body.userId; // Get userId from the request
+    const { name, email, oldPassword, newPassword } = req.body; // Get updated data from the request
+    // console.log(oldPassword,newPassword)
+
+    try {
+        // Find the user by ID
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.json({ success: false, message: "User not found" });
+        }
+
+        // Check if old password is provided and verify it
+        if (oldPassword && newPassword) {
+            const isMatch = await bcrypt.compare(oldPassword, user.password); // Compare old password with hashed password
+            if (!isMatch) {
+                return res.json({ success: false, message: "Old password is incorrect" });
+            }
+
+            // Hash the new password
+            const hashedPassword = await bcrypt.hash(newPassword, 10); // 10 is the salt rounds
+            user.password = hashedPassword; // Update password in user document
+        }
+
+        // Update name and email if provided
+        if (name) user.name = name;
+        if (email) user.email = email;
+
+        // Save updated user details
+        const updatedUser = await user.save();
+        res.json({ success: true, updatedUser });
+
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: "Error updating user" });
+    }
+};
+
+
+  // get user details
+  const getUserDetails = async (req, res) => {
+    const userId = req.body.userId; // This is set by your auth middleware
+  
+    try {
+      const user = await userModel.findById(userId); // Fetch the user by ID
+      if (!user) {
+        return res.json({ success: false, message: "User not found" });
+      }
+      res.json({ success: true, user: { name: user.name, email: user.email } }); // Return relevant user info
+    } catch (error) {
+      console.error(error);
+      res.json({ success: false, message: "Error fetching user details" });
+    }
+  };
+
+module.exports = {loginUser,registerUser,updateUserDetails,getUserDetails}

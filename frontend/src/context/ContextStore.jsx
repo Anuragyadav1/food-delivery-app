@@ -12,7 +12,8 @@ const StoreContextProvider = (props) => {
 
   const [token, setToken] = useState("");
   const [food_list, setFoodList] = useState([]);
-  
+  const [userDetails, setUserDetails] = useState(null); // State for user details
+   
   // Loading state for food list
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null); // Error state
@@ -62,17 +63,63 @@ const StoreContextProvider = (props) => {
     setCartItems(response.data.cartData);
   };
 
+
+  const fetchUserDetails = async () => {
+    try {
+      // console.log("Hii")
+      const token = localStorage.getItem("token"); 
+      const response = await axios.get(url + "/api/user/details", { headers: { token } });
+      setUserDetails(response.data.user);
+      // console.log(response.data)
+    } catch (err) {
+      console.error(err);
+      setError("Failed to fetch user details.");
+    }
+  };
+
+  const updateUserDetails = async (updatedDetails) => {
+    try {
+        const response = await axios.patch(url + "/api/user/update", updatedDetails, { headers: { token } });
+
+        // Check if the response from the backend indicates success
+        if (response.data.success) {
+            setUserDetails(response.data.updatedUser); // Update the local user details state
+            return response.data; // Return the entire backend response (including success status and message)
+        } else {
+            // Handle backend-reported failure (e.g., old password incorrect)
+            setError(response.data.message || "Failed to update user details.");
+            return response.data; // Return the backend failure message
+        }
+
+    } catch (err) {
+        console.error("Update error:", err);
+        setError("An error occurred while updating user details.");
+        return { success: false, message: "An error occurred while updating user details." };
+    }
+};
+
+// console.log("ggg")
+// console.log(localStorage.getItem("token"))
+
   useEffect(() => {
     async function loadData() {
+      const token = localStorage.getItem("token");
       await fetchFoodList();
-      if (localStorage.getItem("token")) {
-        setToken(localStorage.getItem("token"));
+      if (token) {
+            setToken(token);
+            await fetchUserDetails(); // Fetch user details when token is available
+
+
+        // setToken(localStorage.getItem("token"));
+        // console.log(localStorage.getItem("token"))
+        // await fetchUserDetails(); // Fetch user details when token is available
         await loadCartData(localStorage.getItem("token"));
       }
+      setLoading(false);
     }
 
     loadData();
-  }, []);
+  }, [token]);
 
   const contextValue = {
     food_list,
@@ -81,6 +128,9 @@ const StoreContextProvider = (props) => {
     addToCart,
     removeFromCart,
     getTotalCartAmount,
+    updateUserDetails, // Add this to context value
+    userDetails, // Provide user details in context
+    fetchUserDetails, // Add fetchUserDetails here
     url,
     token,
     setToken,
