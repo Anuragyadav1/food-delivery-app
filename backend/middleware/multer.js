@@ -15,7 +15,8 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "food_images", // Cloudinary folder name
-    format: async () => "png", // You can also use 'jpeg', 'webp', etc.
+    format: async () => "jpg", // You can also use 'jpeg', 'webp', etc.
+    transformation: [{ width: 500, height: 500, crop: "fill" }], // Resize to 500x500 pixels
     public_id: (req, file) => `${Date.now()}-${file.originalname}`,
   },
 });
