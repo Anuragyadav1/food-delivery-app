@@ -67,7 +67,6 @@ const cloudinary = require("cloudinary").v2;
 const addFood = async (req, res) => {
   try {
     const { name, description, price, category } = req.body;
-
     // Cloudinary URL from Multer
     const imageUrl = req.file.path; 
 
