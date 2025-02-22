@@ -64,6 +64,7 @@ const StoreContextProvider = (props) => {
   };
 
 
+  
   const fetchUserDetails = async () => {
     try {
       // console.log("Hii")
